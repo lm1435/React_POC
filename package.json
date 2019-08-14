@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "create-components-react": "^2.1.4",
     "flow": "^0.2.3",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
@@ -29,5 +28,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "POC for ease of react usability",
+  "main": "index.js",
+  "repository": "https://github.com/lm1435/React_POC.git",
+  "author": "Luis Meza <luismeza01@gmail.com>",
+  "license": "MIT"
 }
