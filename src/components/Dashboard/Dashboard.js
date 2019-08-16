@@ -8,7 +8,7 @@ import ChangeOfLaw from '../../images/ChangeOfLaw.png';
 import MailImg from '../../images/MailImg.png';
 import PendingPipelines from '../../images/queue.png';
 import AuditsImg from '../../images/AuditsImg.png';
-
+import { DashboardItem } from './DashboardItem';
 const dashboardStats = [
     {
       name: 'Pending Events',
@@ -57,6 +57,7 @@ const dashboardStats = [
     }
   ];
 
+
 export class Dashboard extends Component{
    
      constructor(props) {
@@ -66,6 +67,7 @@ export class Dashboard extends Component{
          }
     }
     onClickItem = () => {
+        console.log(this.state.count);
         this.setState(({count})=>({
             count:count+1
         }));
@@ -82,15 +84,7 @@ export class Dashboard extends Component{
                         <header><h1>MY DASHBOARD</h1></header>
                     </div>
                     <div className="row dashboard__list">
-                        {dashboardStats.map((item,i)=>{
-                            return <a key={i} onClick={this.onClickItem} href="#" className="col-md-6 col-lg-4 dashboard__item">
-                                    <div className="flex justify-align-center">
-                                        <img src={item.icon} />
-                                        <span className="item__name">{item.name}</span>
-                                    </div>
-                                    <span className="item__stat">{item.count}</span>
-                                </a>}
-                        )}
+                        {dashboardStats.map((item,i)=> <DashboardItem key={i} data={item} onClickItem={this.onClickItem} />)}
                     </div>
                 </div>
             </section>

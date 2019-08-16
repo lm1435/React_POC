@@ -12,13 +12,14 @@ class ErrorBoundary extends Component {
           errorInfo: errorInfo
         })
         // You can also log error messages to an error reporting service here
+        console.log('this is the message that was logged');
       }
       
       render() {
         if (this.state.errorInfo) {
           // Error path
           return (
-            <div>
+            <div className="container">
               <h2>Something went wrong.</h2>
                 {this.state.error && this.state.error.toString()}
                 <br />
