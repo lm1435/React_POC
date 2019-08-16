@@ -4,7 +4,7 @@ const cspHtmlWebpackPlugin = require('csp-html-webpack-plugin');
 const cspConfigPolicy = {
   'default-src': "'self'",
   'media-src': '*',
-  'img-src': "'self'",
+  'img-src': "'self' *.netlify.com",
   'object-src': "'none'",
   'script-src': "'self'",
   'style-src': ["'self'"],
