@@ -1,5 +1,5 @@
 import React from 'react';
 
-const Test = () => <h1>THIS IS LAZY LOADED</h1>;
+const Test = () => <div className="App"><h1>THIS IS LAZY LOADED</h1></div>;
 
 export default Test;
