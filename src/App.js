@@ -3,7 +3,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import './App.css';
-import loadable from '@loadable/component'
+import loadable from '@loadable/component';
+
 class DynamicImport extends Component {
   state = {
     component: null,
