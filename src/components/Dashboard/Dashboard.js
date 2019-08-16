@@ -1,58 +1,58 @@
 import React, { Component } from 'react';
 import './Dashboard.css';
-import pendingtask from '../../images/pendingtask.png';
-import managerEscalation from '../../images/manager-escalation.png';
-import LRUIMG from '../../images/LRUImg.png';
-import ChangeOfLaw from '../../images/ChangeOfLaw.png';
-import MailImg from '../../images/MailImg.png';
-import PendingPipelines from '../../images/queue.png';
-import AuditsImg from '../../images/AuditsImg.png';
+// import pendingtask from '../../images/pendingtask.png';
+// import managerEscalation from '../../images/manager-escalation.png';
+// import LRUIMG from '../../images/LRUImg.png';
+// import ChangeOfLaw from '../../images/ChangeOfLaw.png';
+// import MailImg from '../../images/MailImg.png';
+// import PendingPipelines from '../../images/queue.png';
+// import AuditsImg from '../../images/AuditsImg.png';
 import DashboardItem from './DashboardItem';
 
 const dashboardStats = [
   {
     name: 'Pending Events',
-    icon: '../../images/pending-event.png',
+    icon: require('../../images/pending-event.png'),
     count: 200,
   },
   {
     name: 'Pending Tasks',
-    icon: pendingtask,
+    icon: require('../../images/pendingtask.png'),
     count: 920,
   },
   {
     name: 'Manager Escalations',
-    icon: managerEscalation,
+    icon: require('../../images/manager-escalation.png'),
     count: 0,
   },
   {
     name: 'You\'ve got event(s)',
-    icon: '../../images/pending-event.png',
+    icon: require('../../images/pending-event.png'),
     count: 0,
   },
   {
     name: 'LRU SUSPENSE QUEUE',
-    icon: LRUIMG,
+    icon: require('../../images/LRUImg.png'),
     count: 2,
   },
   {
     name: 'YOU\'VE GOT MAIL',
-    icon: MailImg,
+    icon: require('../../images/MailImg.png'),
     count: 0,
   },
   {
     name: 'Change Of Law',
-    icon: ChangeOfLaw,
+    icon: require('../../images/ChangeOfLaw.png'),
     count: 2,
   },
   {
     name: 'Pending Pipelines',
-    icon: PendingPipelines,
+    icon: require('../../images/queue.png'),
     count: 4,
   },
   {
     name: 'AUDIT ITEMS',
-    icon: AuditsImg,
+    icon: require('../../images/AuditsImg.png'),
     count: 465,
   },
 ];
@@ -78,6 +78,8 @@ export class Dashboard extends Component {
       // Simulate a JS error
       throw new Error('I crashed!');
     }
+    console.log(process.env);
+
     return (
       <section id="Dashboard" className="dashboard">
         <div className="container">
