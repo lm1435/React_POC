@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './Dashboard.css';
-import PendingEvents from '../../images/pending-event.png';
 import pendingtask from '../../images/pendingtask.png';
 import managerEscalation from '../../images/manager-escalation.png';
 import LRUIMG from '../../images/LRUImg.png';
@@ -13,7 +12,7 @@ import DashboardItem from './DashboardItem';
 const dashboardStats = [
   {
     name: 'Pending Events',
-    icon: PendingEvents,
+    icon: '../../images/pending-event.png',
     count: 200,
   },
   {
@@ -28,7 +27,7 @@ const dashboardStats = [
   },
   {
     name: 'You\'ve got event(s)',
-    icon: PendingEvents,
+    icon: '../../images/pending-event.png',
     count: 0,
   },
   {
