@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 import './Dashboard.css';
 import pendingtask from '../../images/pendingtask.png';
 import managerEscalation from '../../images/manager-escalation.png';
@@ -66,18 +67,7 @@ export class Dashboard extends Component {
     };
   }
 
-  onClickItem = () => {
-    this.setState(({ count }) => ({
-      count: count + 1,
-    }));
-  }
-
   render() {
-    const { count } = this.state;
-    if (count === 5) {
-      // Simulate a JS error
-      throw new Error('I crashed!');
-    }
     return (
       <section id="Dashboard" className="dashboard">
         <div className="container">
@@ -85,7 +75,7 @@ export class Dashboard extends Component {
             <header><h1>MY DASHBOARD</h1></header>
           </div>
           <div className="row dashboard__list">
-            {dashboardStats.map((item, i) => <DashboardItem key={i} data={item} onClickItem={this.onClickItem} />)}
+            {dashboardStats.map((item, i) => <ErrorBoundary key={i}><DashboardItem  data={item} onClickItem={this.onClickItem} /></ErrorBoundary>)}
           </div>
         </div>
       </section>
