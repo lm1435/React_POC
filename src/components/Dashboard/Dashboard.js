@@ -59,14 +59,7 @@ const dashboardStats = [
 ];
 
 
-export class Dashboard extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      count: 0,
-    };
-  }
-
+export default class Dashboard extends Component {
   render() {
     return (
       <section id="Dashboard" className="dashboard">
@@ -75,12 +68,14 @@ export class Dashboard extends Component {
             <header><h1>MY DASHBOARD</h1></header>
           </div>
           <div className="row dashboard__list">
-            {dashboardStats.map((item, i) => <ErrorBoundary key={i}><DashboardItem  data={item} onClickItem={this.onClickItem} /></ErrorBoundary>)}
+            {dashboardStats.map((item, i) => (
+              <ErrorBoundary>
+                <DashboardItem key={i} data={item} onClickItem={this.onClickItem} />
+              </ErrorBoundary>
+            ))}
           </div>
         </div>
       </section>
     );
   }
 }
-
-export default Dashboard;

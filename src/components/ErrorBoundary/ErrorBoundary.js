@@ -1,7 +1,7 @@
 /* eslint-disable prefer-destructuring */
 import React, { Component } from 'react';
 
-class ErrorBoundary extends Component {
+export default class ErrorBoundary extends Component {
   constructor(props) {
     super(props);
     this.state = { error: false };
@@ -43,5 +43,3 @@ class ErrorBoundary extends Component {
     return children;
   }
 }
-
-export default ErrorBoundary;

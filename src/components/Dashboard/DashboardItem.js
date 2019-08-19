@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 
-export class DashboardItem extends Component {
+export default class DashboardItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -34,5 +34,3 @@ export class DashboardItem extends Component {
     );
   }
 }
-
-export default DashboardItem;

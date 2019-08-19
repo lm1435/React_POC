@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import './App.css';
 import loadable from '@loadable/component';
-import { Dashboard } from './components/Dashboard/Dashboard';
+import Dashboard from './components/Dashboard/Dashboard';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 
 class DynamicImport extends Component {
