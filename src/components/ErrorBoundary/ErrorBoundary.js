@@ -11,9 +11,6 @@ class ErrorBoundary extends Component {
     window.onerror = function errorHandlerTest(msg, file, line, col, error) {
       const errorObj = {
         msg,
-        file,
-        line,
-        col,
         error,
       };
       console.log(errorObj);
@@ -21,15 +18,9 @@ class ErrorBoundary extends Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    let specificErrorMsg;
-    if (errorInfo) {
-      specificErrorMsg = (errorInfo.componentStack).split('\n')[1];
-    }
     // Catch errors in any components below and re-render with error message
     this.setState({
       error,
-      errorInfo,
-      specificErrorMsg,
     }, () => {
       // You can also log error messages to an error reporting service here
       console.log(errorInfo.componentStack, 'this is the componentError that was logged');
@@ -37,16 +28,14 @@ class ErrorBoundary extends Component {
   }
 
   render() {
-    const { errorInfo, error, specificErrorMsg } = this.state;
+    const { error } = this.state;
     const { children } = this.props;
-    if (errorInfo) {
+    if (error) {
       // Error path
       return (
         <div className="container">
           <h2>Something went wrong.</h2>
           {error && error.toString()}
-          <br />
-          {specificErrorMsg}
           <br />
           <br />
           <br />
