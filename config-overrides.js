@@ -15,7 +15,7 @@ function modifyConfiguration(config) {
     config.plugins.push(new cspHtmlWebpackPlugin(cspConfigPolicy));
   }
 
-  config.optimization.minimizer.pop();
+  config.optimization.minimizer.shift();
 
   return config;
 }
