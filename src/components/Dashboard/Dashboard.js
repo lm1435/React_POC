@@ -85,7 +85,7 @@ export class Dashboard extends Component {
             <header><h1>MY DASHBOARD</h1></header>
           </div>
           <div className="row dashboard__list">
-            {dashboardStats.map((item, i) => <DashboardItem key={i} data={item} onClickItem={this.onClickItem} /> )}
+            {dashboardStats.map((item, i) => <DashboardItem key={i} data={item} onClickItem={this.onClickItem} />)}
           </div>
         </div>
       </section>
