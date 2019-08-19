@@ -10,14 +10,16 @@ const cspConfigPolicy = {
   'style-src': ["'self'"],
 };
 
-function addCspHtmlWebpackPlugin(config) {
+function modifyConfiguration(config) {
   if (process.env.NODE_ENV === 'production') {
     config.plugins.push(new cspHtmlWebpackPlugin(cspConfigPolicy));
   }
+
+  config.optimization.minimizer.pop();
 
   return config;
 }
 
 module.exports = {
-  webpack: override(addCspHtmlWebpackPlugin),
+  webpack: override(modifyConfiguration),
 };
