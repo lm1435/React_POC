@@ -24,7 +24,6 @@ class ErrorBoundary extends Component {
       // Error path
       return (
         <div className="container">
-          <iframe src="https://giphy.com/embed/26tPtM8Arb1nyc1i0" width="100%" height="100%" frameBorder="0" className="giphy-embed" allowFullScreen title="test" />
           <h2>Something went wrong.</h2>
           {error && error.toString()}
           <br />
