@@ -17,13 +17,10 @@ class ErrorBoundary extends Component {
     };
   }
 
-  componentDidCatch(error, errorInfo) {
+  componentDidCatch(error) {
     // Catch errors in any components below and re-render with error message
     this.setState({
       error,
-    }, () => {
-      // You can also log error messages to an error reporting service here
-      console.log(errorInfo.componentStack, 'this is the componentError that was logged');
     });
   }
 
