@@ -46,6 +46,7 @@ const AsyncHome = (props) => (
 );
 
 const Test3 = loadable(() => import('./Test3'));
+const Test4 = loadable(() => import('./Test4'));
 
 function App() {
   return (
@@ -55,11 +56,13 @@ function App() {
           <li><Link to="/">Home</Link></li>
           <li><Link to="test">Test</Link></li>
           <li><Link to="test2">Alternative</Link></li>
+          <li><Link to="test4">tracker</Link></li>
         </ul>
         <Dashboard />
         <Route path="/" exact component={AsyncHome} />
         <Route path="/test" exact component={AsyncTest} />
         <Route path="/test2" exact component={Test3} />
+        <Route path="/test4" exact component={Test4} />
       </Router>
     </ErrorBoundary>
   );

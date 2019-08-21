@@ -1,17 +1,35 @@
 /* eslint-disable prefer-destructuring */
 import React, { Component } from 'react';
 import axios from 'axios';
+import LMSAsyncTracker from './LMSAsyncTracker';
 
 export default class ErrorBoundary extends Component {
   constructor(props) {
     super(props);
-    this.state = { error: false };
+    this.state = {
+       error: false,
+       spinnerrActive: null,
+       };
   }
 
   componentDidMount() {
-    axios.interceptors.response.use((response) => response, (error) => {
+    axios.interceptors.request.use((config) => {
+      // Do something before request is sent
+      this.setState({ spinnerrActive: true });
+      return config;
+    }, (error) => {
+      // Do something with request error
+      return Promise.reject(error);
+    });
+
+    axios.interceptors.response.use((response) => {
+      this.setState({ spinnerrActive: false });
+      return response;
+    }, (error) => {
       Promise.reject(error);
       console.log(error);
+      this.setState({ spinnerrActive: false });
+
     });
 
     window.onerror = function errorHandlerTest(msg, file, line, col, error) {
@@ -31,7 +49,7 @@ export default class ErrorBoundary extends Component {
   }
 
   render() {
-    const { error } = this.state;
+    const { error, spinnerrActive } = this.state;
     const { children } = this.props;
     if (error) {
       // Error path
@@ -46,6 +64,11 @@ export default class ErrorBoundary extends Component {
       );
     }
     // Normally, just render children
-    return children;
+    return (
+      <div>
+        <LMSAsyncTracker active={spinnerrActive} />
+        { children }
+      </div>
+    );
   }
 }
