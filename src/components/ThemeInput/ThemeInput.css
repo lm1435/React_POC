@@ -1,0 +1,17 @@
+
+input{
+  border:0px;
+  outline:none;
+}
+.input-container{
+  border:1px solid #555559;
+  padding:5px;
+}
+div.error{
+  border:1px solid red;
+}
+p.error{
+  color:red;
+  margin-bottom:10px;
+  font-size:12px;
+}

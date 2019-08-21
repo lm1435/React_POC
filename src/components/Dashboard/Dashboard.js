@@ -9,6 +9,7 @@ import MailImg from '../../images/MailImg.png';
 import PendingPipelines from '../../images/queue.png';
 import AuditsImg from '../../images/AuditsImg.png';
 import DashboardItem from './DashboardItem';
+import FormPOC from './FormPOC/FormPOC';
 
 const dashboardStats = [
   {
@@ -68,11 +69,14 @@ export default class Dashboard extends Component {
             <header><h1>MY DASHBOARD</h1></header>
           </div>
           <div className="row dashboard__list">
-            {dashboardStats.map((item, i) => (
-              <ErrorBoundary>
-                <DashboardItem key={i} data={item} onClickItem={this.onClickItem} />
+            {dashboardStats.map((item) => (
+              <ErrorBoundary key={item.name}>
+                <DashboardItem key={item.name} data={item} onClickItem={this.onClickItem} />
               </ErrorBoundary>
             ))}
+          </div>
+          <div className="row">
+            <FormPOC />
           </div>
         </div>
       </section>
