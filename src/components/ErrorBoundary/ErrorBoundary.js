@@ -1,5 +1,6 @@
 /* eslint-disable prefer-destructuring */
 import React, { Component } from 'react';
+import axios from 'axios';
 
 export default class ErrorBoundary extends Component {
   constructor(props) {
@@ -8,6 +9,11 @@ export default class ErrorBoundary extends Component {
   }
 
   componentDidMount() {
+    axios.interceptors.response.use((response) => response, (error) => {
+      Promise.reject(error);
+      console.log(error);
+    });
+
     window.onerror = function errorHandlerTest(msg, file, line, col, error) {
       const errorObj = {
         msg,
