@@ -43,9 +43,9 @@ export default class ErrorBoundary extends Component {
     }
     // Normally, just render children
     return (
-      <div>
+      <>
         { children }
-      </div>
+      </>
     );
   }
 }

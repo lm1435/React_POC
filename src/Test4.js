@@ -12,9 +12,19 @@ class Test4 extends Component {
   }
 
   response = () => {
-    fetchApi().then((res) => this.setState({
-      test: res.data,
-    })).catch((error) => {
+    fetchApi({ critical: true }).then((res) => {
+      this.setState({
+        test: res.data,
+      });
+    }).then(() => {
+      fetchApi().then((res) => this.setState({
+        test: res.data,
+      })).catch((error) => {
+        this.setState({
+          error,
+        });
+      });
+    }).catch((error) => {
       this.setState({
         error,
       });

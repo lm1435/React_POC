@@ -3,34 +3,55 @@ import axios from 'axios';
 import './spinner.css';
 
 export default class LMSAsyncTracker extends Component {
-  state = { spinnerrActive: false }
+  state = {
+    promiseTrackerArr: [],
+  }
 
   componentDidMount() {
     axios.interceptors.request.use((config) => {
+      let isCriticalPromise = false;
+      if (config && config.data && config.data.critical) {
+        isCriticalPromise = true;
+        if (config.method === 'get') {
+          config.data = null;
+        }
+      }
       // Do something before request is sent
-      this.setState({ spinnerrActive: true });
+      const { promiseTrackerArr } = this.state;
+      this.setState({
+        promiseTrackerArr: [
+          ...promiseTrackerArr,
+          {
+            url: config.url,
+            critical: isCriticalPromise,
+            method: config.method,
+          },
+        ],
+      }, () => console.log(this.state.promiseTrackerArr));
       return config;
     }, (error) => (
       // Do something with request error
       Promise.reject(error)
     ));
 
-    axios.interceptors.response.use((response) => {
-      this.setState({ spinnerrActive: false });
-      return response;
-    }, (error) => {
-      Promise.reject(error);
-      console.log(error);
-      this.setState({ spinnerrActive: false });
-    });
+    // axios.interceptors.response.use((response) => {
+    //   console.log(response, 'aqui');
+    //   const { promiseTrackerArr } = this.state;
+    //   this.setState({ promiseTrackerArr: [] });
+    //   return response;
+    // }, (error) => {
+    //   const { promiseTrackerArr } = this.state;
+    //   Promise.reject(error);
+    //   this.setState({ promiseTrackerArr: [] });
+    // });
   }
 
   render() {
-    const { spinnerrActive } = this.state;
+    const { promiseTrackerArr } = this.state;
     const { children } = this.props;
     return (
       <div>
-        {spinnerrActive ? <div className="spinner"><span /></div> : null}
+        {promiseTrackerArr.length ? <div className="spinner"><span /></div> : null}
         { children }
       </div>
     );

@@ -3,9 +3,10 @@
   -webkit-transition: opacity linear 0.1s;
   -o-transition: opacity linear 0.1s;
   transition: opacity linear 0.1s;   
-  position: absolute;
+  position: fixed;
   left: 50%;
   top: 50%;
+  z-index: 1;
 }
 
 .spinner::before {
@@ -17,6 +18,8 @@
   content: "";
   height: 40px;
   position: absolute;
+  left: 50%;
+  top: 50%;
   opacity: inherit;
   -webkit-transform: translate3d(-50%, -50%, 0);
           transform: translate3d(-50%, -50%, 0);

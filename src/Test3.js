@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import fetchApi from './components/Services/test-svc';
+import fetchApi2 from './components/Services/test-svc';
 
 class Test3 extends Component {
   state = {
@@ -12,7 +12,7 @@ class Test3 extends Component {
   }
 
   response = () => {
-    fetchApi().then((res) => this.setState({
+    fetchApi2().then((res) => this.setState({
       test: res.data.results,
     })).catch((error) => {
       this.setState({
