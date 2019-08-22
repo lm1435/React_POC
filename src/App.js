@@ -1,11 +1,14 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/state-in-constructor */
+// eslint-disable-next-line max-classes-per-file
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import './App.css';
 import loadable from '@loadable/component';
+import axios from 'axios';
 import Dashboard from './components/Dashboard/Dashboard';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
+import LMSAsyncTracker from './components/ErrorBoundary/LMSAsyncTracker';
 
 class DynamicImport extends Component {
   state = {
@@ -48,24 +51,50 @@ const AsyncHome = (props) => (
 const Test3 = loadable(() => import('./Test3'));
 const Test4 = loadable(() => import('./Test4'));
 
-function App() {
-  return (
-    <ErrorBoundary>
-      <Router>
-        <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="test">Test</Link></li>
-          <li><Link to="test2">Alternative</Link></li>
-          <li><Link to="test4">tracker</Link></li>
-        </ul>
-        <Dashboard />
-        <Route path="/" exact component={AsyncHome} />
-        <Route path="/test" exact component={AsyncTest} />
-        <Route path="/test2" exact component={Test3} />
-        <Route path="/test4" exact component={Test4} />
-      </Router>
-    </ErrorBoundary>
-  );
-}
+export default class App extends Component {
+  state = {
+    spinnerrActive: null,
+  };
 
-export default App;
+  componentDidMount() {
+    axios.interceptors.request.use((config) => {
+      // Do something before request is sent
+      this.setState({ spinnerrActive: true });
+      return config;
+    }, (error) => (
+      // Do something with request error
+      Promise.reject(error)
+    ));
+
+    axios.interceptors.response.use((response) => {
+      this.setState({ spinnerrActive: false });
+      return response;
+    }, (error) => {
+      Promise.reject(error);
+      console.log(error);
+      this.setState({ spinnerrActive: false });
+    });
+  }
+
+  render() {
+    const { spinnerrActive } = this.state;
+    return (
+      <ErrorBoundary>
+        <Router>
+          <ul>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="test">Test</Link></li>
+            <li><Link to="test2">Alternative</Link></li>
+            <li><Link to="test4">tracker</Link></li>
+          </ul>
+          <Dashboard />
+          <Route path="/" exact component={AsyncHome} />
+          <Route path="/test" exact component={AsyncTest} />
+          <Route path="/test2" exact component={Test3} />
+          <Route path="/test4" exact component={Test4} />
+        </Router>
+        <LMSAsyncTracker active={spinnerrActive} />
+      </ErrorBoundary>
+    );
+  }
+}

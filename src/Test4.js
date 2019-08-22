@@ -13,7 +13,7 @@ class Test4 extends Component {
 
   response = () => {
     fetchApi().then((res) => this.setState({
-      test: res.data.results,
+      test: res.data,
     })).catch((error) => {
       this.setState({
         error,
@@ -38,13 +38,13 @@ class Test4 extends Component {
           ) : test ? (
             <div>
               {test.map((item) => (
-                <div>
-                  {item.title}
+                <div className="Content">
+                  {' Title: '}
+                  {item.title.rendered}
                   <br />
                 </div>
               ))}
               <br />
-              <h1>imported with Loadable....WHHHHATTTT?!</h1>
             </div>
           ) : null
         }
