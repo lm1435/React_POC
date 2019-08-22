@@ -1,9 +1,11 @@
 .spinner {
   opacity: 1;
-  position: relative;
   -webkit-transition: opacity linear 0.1s;
   -o-transition: opacity linear 0.1s;
   transition: opacity linear 0.1s;   
+  position: absolute;
+  left: 50%;
+  top: 50%;
 }
 
 .spinner::before {
@@ -14,10 +16,8 @@
   border-radius: 50%;
   content: "";
   height: 40px;
-  left: 50%;
-  opacity: inherit;
   position: absolute;
-  top: 50%;
+  opacity: inherit;
   -webkit-transform: translate3d(-50%, -50%, 0);
           transform: translate3d(-50%, -50%, 0);
   -webkit-transform-origin: center;
