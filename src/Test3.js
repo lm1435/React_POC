@@ -40,7 +40,7 @@ class Test3 extends Component {
           ) : test ? (
             <div>
               {test.map((item) => (
-                <div>
+                <div key={item.title}>
                   {item.title}
                   <br />
                 </div>

@@ -51,8 +51,7 @@ class Test4 extends Component {
             <div>
               <h1>THIS IS RICHARD'S DATA</h1>
               {test.map((item) => (
-                <div className="Content">
-
+                <div key={item.title.rendered} className="Content">
                   {' Title: '}
                   {item.title.rendered}
                   <br />
@@ -66,7 +65,7 @@ class Test4 extends Component {
           <>
             <h1>THIS IS LUIS' DATA</h1>
             {test2.map((item) => (
-              <div className="Content">
+              <div key={item.title} className="Content">
                 {' Title: '}
                 {item.title}
                 <br />
