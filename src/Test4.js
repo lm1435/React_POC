@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import fetchApi from './components/Services/projectservice';
 import fetchApi2 from './components/Services/test-svc';
+import multiFetch from './components/Services/multiFetch';
 
 class Test4 extends Component {
   state = {
@@ -15,10 +16,22 @@ class Test4 extends Component {
   }
 
   response = () => {
-    axios.all([
+    // axios.all([
+    //   fetchApi({ critical: true }),
+    //   fetchApi2(),
+    // ])
+    //   .then(axios.spread((data1, data2) => this.setState({
+    //     test: data1.data,
+    //     test2: data2.data.results,
+    //   })))
+    //   .catch((err) => this.setState({
+    //     error: err,
+    //   }));
+
+    multiFetch(
       fetchApi({ critical: true }),
       fetchApi2(),
-    ])
+    )
       .then(axios.spread((data1, data2) => this.setState({
         test: data1.data,
         test2: data2.data.results,
