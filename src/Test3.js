@@ -12,13 +12,15 @@ class Test3 extends Component {
   }
 
   response = () => {
-    fetchApi2().then((res) => this.setState({
-      test: res.data.results,
-    })).catch((error) => {
-      this.setState({
-        error,
+    fetchApi2()
+      .then((res) => this.setState({
+        test: res.data.results,
+      }))
+      .catch((error) => {
+        this.setState({
+          error,
+        });
       });
-    });
   }
 
   render() {

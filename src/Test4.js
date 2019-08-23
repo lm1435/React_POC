@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import fetchApi from './components/Services/projectservice';
+import fetchApi2 from './components/Services/test-svc';
 
 class Test4 extends Component {
   state = {
     test: null,
+    test2: null,
     error: false,
   }
 
@@ -12,27 +15,26 @@ class Test4 extends Component {
   }
 
   response = () => {
-    fetchApi({ critical: true }).then((res) => {
-      this.setState({
-        test: res.data,
-      });
-    }).then(() => {
-      fetchApi().then((res) => this.setState({
-        test: res.data,
-      })).catch((error) => {
-        this.setState({
-          error,
-        });
-      });
-    }).catch((error) => {
-      this.setState({
-        error,
-      });
-    });
+    axios.all([
+      fetchApi({ critical: true }),
+      fetchApi2(),
+    ])
+      .then(axios.spread((data1, data2) => this.setState({
+        test: data1.data,
+        test2: data2.data.results,
+      })))
+      .catch((err) => this.setState({
+        error: err,
+      }));
   }
 
   render() {
-    const { test, error } = this.state;
+    const {
+      test,
+      test2,
+      error,
+    } = this.state;
+
     return (
       <div className="App">
         {
@@ -47,8 +49,10 @@ class Test4 extends Component {
             </div>
           ) : test ? (
             <div>
+              <h1>THIS IS RICHARD'S DATA</h1>
               {test.map((item) => (
                 <div className="Content">
+
                   {' Title: '}
                   {item.title.rendered}
                   <br />
@@ -58,6 +62,18 @@ class Test4 extends Component {
             </div>
           ) : null
         }
+        {test2 ? (
+          <>
+            <h1>THIS IS LUIS' DATA</h1>
+            {test2.map((item) => (
+              <div className="Content">
+                {' Title: '}
+                {item.title}
+                <br />
+              </div>
+            ))}
+          </>
+        ) : null}
       </div>
     );
   }

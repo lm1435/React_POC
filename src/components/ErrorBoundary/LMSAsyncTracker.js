@@ -5,6 +5,7 @@ import './spinner.css';
 export default class LMSAsyncTracker extends Component {
   state = {
     promiseTrackerArr: [],
+    error: false,
   }
 
   componentDidMount() {
@@ -27,23 +28,27 @@ export default class LMSAsyncTracker extends Component {
             method: config.method,
           },
         ],
-      }, () => console.log(this.state.promiseTrackerArr));
+      });
       return config;
     }, (error) => (
       // Do something with request error
       Promise.reject(error)
     ));
 
-    // axios.interceptors.response.use((response) => {
-    //   console.log(response, 'aqui');
-    //   const { promiseTrackerArr } = this.state;
-    //   this.setState({ promiseTrackerArr: [] });
-    //   return response;
-    // }, (error) => {
-    //   const { promiseTrackerArr } = this.state;
-    //   Promise.reject(error);
-    //   this.setState({ promiseTrackerArr: [] });
-    // });
+    axios.interceptors.response.use((response) => {
+      const { promiseTrackerArr } = this.state;
+
+      if (response && response.config && response.config.url) {
+        this.setState({
+          promiseTrackerArr: promiseTrackerArr.filter((item) => item.url !== response.config.url),
+        });
+      }
+      return response;
+    }, (err) => {
+      // const { promiseTrackerArr, error } = this.state;
+      Promise.reject(err);
+      // this.setState({ promiseTrackerArr: [] });
+    });
   }
 
   render() {

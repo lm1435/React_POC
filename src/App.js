@@ -61,12 +61,12 @@ function App() {
             <li><Link to="test2">Alternative</Link></li>
             <li><Link to="test4">tracker</Link></li>
           </ul>
-          <Dashboard />
           <Route path="/" exact component={AsyncHome} />
           <Route path="/test" exact component={AsyncTest} />
           <Route path="/test2" exact component={Test3} />
           <Route path="/test4" exact component={Test4} />
         </Router>
+        <Dashboard />
       </LMSAsyncTracker>
     </ErrorBoundary>
   );
