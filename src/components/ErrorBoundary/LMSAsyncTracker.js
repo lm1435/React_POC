@@ -5,7 +5,6 @@ import './spinner.css';
 export default class LMSAsyncTracker extends Component {
   state = {
     promiseTrackerArr: [],
-    error: false,
   }
 
   componentDidMount() {
@@ -44,10 +43,14 @@ export default class LMSAsyncTracker extends Component {
         });
       }
       return response;
-    }, (err) => {
-      // const { promiseTrackerArr, error } = this.state;
-      Promise.reject(err);
-      // this.setState({ promiseTrackerArr: [] });
+    }, (error) => {
+      const { promiseTrackerArr } = this.state;
+      if (error && error.config && error.config.url) {
+        this.setState({
+          promiseTrackerArr: promiseTrackerArr.filter((item) => item.url !== error.config.url),
+        });
+      }
+      Promise.reject(error);
     });
   }
 
