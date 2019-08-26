@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import fetchApi2 from './components/Services/test-svc';
+import { fetchApi2 } from './components/Services/test-svc';
 
 class Test3 extends Component {
   state = {

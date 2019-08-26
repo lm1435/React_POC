@@ -1,7 +1,15 @@
 import axios from 'axios';
 
-export default function multiFetch() {
+function multiFetch() {
   return (
     axios.all([...arguments])
   );
 }
+
+function spread(data) {
+  return (
+    axios.spread(data)
+  );
+}
+
+export { spread, multiFetch };

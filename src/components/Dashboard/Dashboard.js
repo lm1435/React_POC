@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
+import ErrorBoundary from '../ErrorBoundary/Error-Boundary';
 import './Dashboard.css';
 import pendingtask from '../../images/pendingtask.png';
 import managerEscalation from '../../images/manager-escalation.png';

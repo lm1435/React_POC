@@ -2,11 +2,16 @@
 /* eslint-disable react/state-in-constructor */
 // eslint-disable-next-line max-classes-per-file
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  HashRouter,
+} from 'react-router-dom';
 import './App.css';
 import loadable from '@loadable/component';
 import Dashboard from './components/Dashboard/Dashboard';
-import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
+import ErrorBoundary from './components/ErrorBoundary/Error-Boundary';
 import LMSAsyncTracker from './components/ErrorBoundary/LMSAsyncTracker';
 
 class DynamicImport extends Component {
@@ -50,10 +55,10 @@ const AsyncHome = (props) => (
 const Test3 = loadable(() => import('./Test3'));
 const Test4 = loadable(() => import('./Test4'));
 
-function App() {
-  return (
-    <ErrorBoundary>
-      <LMSAsyncTracker>
+export default () => (
+  <ErrorBoundary>
+    <LMSAsyncTracker>
+      <HashRouter>
         <Router>
           <ul>
             <li><Link to="/">Home</Link></li>
@@ -66,10 +71,8 @@ function App() {
           <Route path="/test2" exact component={Test3} />
           <Route path="/test4" exact component={Test4} />
         </Router>
-        <Dashboard />
-      </LMSAsyncTracker>
-    </ErrorBoundary>
-  );
-}
-
-export default App;
+      </HashRouter>
+      <Dashboard />
+    </LMSAsyncTracker>
+  </ErrorBoundary>
+);

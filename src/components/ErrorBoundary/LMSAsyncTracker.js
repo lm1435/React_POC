@@ -67,7 +67,7 @@ export default class LMSAsyncTracker extends Component {
     const { children } = this.props;
     return (
       <div>
-        {promiseTrackerArr.length ? <div className="spinner"><span /></div> : null}
+        {promiseTrackerArr.length ? <div className="spinner" /> : null}
         {!err ? (
           <>
             { children }
