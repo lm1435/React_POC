@@ -1,5 +1,6 @@
 import React from 'react';
+import Dashboard from './components/Dashboard/Dashboard';
 
-const Test = () => <div className="App"><h1>THIS IS LAZY LOADED</h1></div>;
+const Test = () => <Dashboard />;
 
 export default Test;

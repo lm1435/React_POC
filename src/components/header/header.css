@@ -1,0 +1,13 @@
+header.header {
+    display: flex;
+    justify-content: center;
+    background: #2196f3;
+    height: 100px;
+    align-items: center;
+}
+
+header.header svg {
+    fill: white;
+    height: 45px;
+    width: 222px;
+}

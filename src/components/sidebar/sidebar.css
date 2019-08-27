@@ -1,0 +1,49 @@
+.sidebar {
+    width: 17%;
+    background: #2196f3;
+    min-height: 90vh;
+    max-height: 100%;
+}
+
+.sidebar a {
+    color: white;
+    padding: 12px;
+    display: block;
+    text-decoration: none
+}
+
+.sidebar li {
+    position: relative;
+}
+
+.sidebar ul {
+    margin: 0;
+}
+
+.component {
+    width: 83%;
+}
+
+.flex {
+    display: flex;
+}
+
+.child-routes,
+.child-route {
+    text-decoration: none;
+    display: none;
+    list-style: none;
+}
+
+.sidebar li:hover > .child-routes,
+.sidebar li:hover > .child-route {
+    display: block;
+}
+
+.sidebar li:hover > .child-routes li {
+    position: absolute;
+    top: 0;
+    right: -100px;
+    background: #4AAAA5;
+    width: 100px;
+}

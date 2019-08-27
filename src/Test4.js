@@ -15,18 +15,6 @@ class Test4 extends Component {
   }
 
   response = () => {
-    // axios.all([
-    //   fetchApi({ critical: true }),
-    //   fetchApi2(),
-    // ])
-    //   .then(axios.spread((data1, data2) => this.setState({
-    //     test: data1.data,
-    //     test2: data2.data.results,
-    //   })))
-    //   .catch((err) => this.setState({
-    //     error: err,
-    //   }));
-
     multiFetch(
       fetchApi({ critical: true }),
       fetchApi2(),

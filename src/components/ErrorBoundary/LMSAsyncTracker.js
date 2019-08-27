@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { PropTypes } from 'prop-types';
 import './spinner.css';
 
 export default class LMSAsyncTracker extends Component {
@@ -9,6 +10,11 @@ export default class LMSAsyncTracker extends Component {
   }
 
   componentDidMount() {
+    this.axiosRequest();
+    this.axiosResponse();
+  }
+
+  axiosRequest = () => {
     axios.interceptors.request.use((config) => {
       let isCriticalPromise = false;
       if (config && config.data && config.data.critical) {
@@ -34,7 +40,9 @@ export default class LMSAsyncTracker extends Component {
       // Do something with request error
       Promise.reject(error)
     ));
+  }
 
+  axiosResponse = () => {
     axios.interceptors.response.use((response) => {
       const { promiseTrackerArr } = this.state;
 
@@ -77,3 +85,9 @@ export default class LMSAsyncTracker extends Component {
     );
   }
 }
+
+LMSAsyncTracker.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.array]).isRequired,
+};

@@ -3,7 +3,7 @@ import logo from './logo.svg';
 
 const Test2 = () => (
   <div className="App">
-    <header className="App-header">
+    <div className="App-header">
       <img src={logo} className="App-logo" alt="logo" />
       <p>
         Edit
@@ -18,7 +18,7 @@ const Test2 = () => (
       >
         Learn React
       </a>
-    </header>
+    </div>
   </div>
 );
 
