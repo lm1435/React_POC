@@ -24,41 +24,41 @@ export default class FormPOC extends Component {
     };
   }
 
-  onChangeHandler = (e) => {
-    const { isEmpty, isValidEmail } = FormValidation;
-    const errorObj = {};
-    
-    errorObj[e.name] = isEmpty(e.value);
+  onChangeHandler = (target) => {
+    const { errorObj } = FormValidation;
 
     this.setState(({ errors }) => ({
-      [e.name]: e.value,
-      errors: { ...errors, ...errorObj },
+      [target.name]: target.value,
+      errors: { ...errors, ...errorObj(target) },
     }));
+  }
+
+  validateForm = (e) => {
+    e.preventDefault();
   }
 
   validateFields = (e) => {
     e.preventDefault();
-    const { isEmpty, isValidEmail } = FormValidation;
-    const errors = {};
+    const { errorObj } = FormValidation;
+    let target = {};
+    // define error obj
+    let errors = {};
     let formValid = true;
     Fields.forEach((field) => {
-      // eslint-disable-next-line react/destructuring-assignment
-      const value = this.state[field];
-      switch (field) {
-        case 'Email':
-          errors[field] = isValidEmail(value) && isEmpty(value);
-          break;
-        default:
-          errors[field] = isEmpty(value);
-      }
+      target = {
+        // eslint-disable-next-line react/destructuring-assignment
+        value: this.state[field],
+        name: field,
+      };
+
+      // append new returned error obj
+      errors = { ...errors, ...errorObj(target) };
       if (!errors[field]) {
         formValid = false;
       }
     });
     console.log(errors, formValid);
-    this.setState({ errors, formValid }, () => {
-      this.onSubmit();
-    });
+    this.setState({ errors, formValid }, () => this.onSubmit());
   }
 
   onSubmit=() => {
