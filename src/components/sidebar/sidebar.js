@@ -47,7 +47,7 @@ const Sidebar = () => (
   <Router>
     <div className="flex">
       <div className="sidebar">
-        <ul style={{ listStyleType: 'none', padding: 0 }}>
+        <ul className="menu" style={{ listStyleType: 'none', padding: 0 }}>
           {routes.map((route) => (
             <li key={route.linkTo + Math.random()}>
               <Link
@@ -67,6 +67,8 @@ const Sidebar = () => (
                       </Link>
                     </li>
                   ))}
+                  <li><a href="https://www.google.com">Fake 2</a></li>
+                  <li><a href="https://www.google.com">Fake 3</a></li>
                 </ul>
               )}
               {route.childrenRoute && (

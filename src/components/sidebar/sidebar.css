@@ -21,6 +21,11 @@
     margin: 0;
 }
 
+.menu > li > a{
+    position: relative;
+    z-index: 1;
+    background: #099fd6;
+}
 .component {
     width: 83%;
     padding: 10px
@@ -33,19 +38,38 @@
 .child-routes,
 .child-route {
     text-decoration: none;
-    display: none;
-    list-style: none;
-}
-
-.sidebar li:hover > .child-routes,
-.sidebar li:hover > .child-route {
     display: block;
+    list-style: none;
+    width:100%;
+    padding:0px;
+    transition:all .25s ease-out;
 }
-
-.sidebar li:hover > .child-routes li {
+.child-routes{
     position: absolute;
     top: 0;
-    right: -100px;
+    opacity: 0;
+    z-index: 0;
+}
+.sidebar li > .child-route {
+    transform: translateY(-100%);
+    padding-left:20px;
+    max-height:0px;
+}
+.sidebar li:hover > .child-route {
+    display: block;
+    background:red;
+    max-height:500px;
+    transform: translateY(0%);
+}
+
+.sidebar li > .child-routes {
+    max-height: 0px;
+    overflow: hidden;
+}
+.sidebar li:hover > .child-routes {
+    transform: translateX(100%);
     background: #4AAAA5;
-    width: 100px;
+    opacity: 1;
+    max-height:500px;
+
 }
