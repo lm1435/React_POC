@@ -1,8 +1,9 @@
 .sidebar {
     width: 17%;
-    background: #2196f3;
+    background: #099fd6;
     min-height: 90vh;
     max-height: 100%;
+    z-index: 1;
 }
 
 .sidebar a {
@@ -22,6 +23,7 @@
 
 .component {
     width: 83%;
+    padding: 10px
 }
 
 .flex {
