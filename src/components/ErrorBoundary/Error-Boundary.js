@@ -1,49 +1,91 @@
-/* eslint-disable prefer-destructuring */
 import React, { Component } from 'react';
+import axios from 'axios';
+import { PropTypes } from 'prop-types';
+// import './async-tracker.css';
 
-export default class ErrorBoundary extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      error: false,
-    };
+export default class AsyncTracker extends Component {
+  state = {
+    promiseTrackerArr: [],
+    err: false,
   }
 
   componentDidMount() {
-    window.onerror = function errorHandlerTest(msg, file, line, col, error) {
-      const errorObj = {
-        msg,
-        error,
-      };
-      console.log(errorObj);
-    };
+    this.axiosRequest();
+    this.axiosResponse();
   }
 
-  componentDidCatch(error) {
-    // Catch errors in any components below and re-render with error message
-    this.setState({
-      error,
+  axiosRequest = () => {
+    axios.interceptors.request.use((config) => {
+      let isCriticalPromise = false;
+      if (config && config.data && config.data.critical) {
+        isCriticalPromise = true;
+        if (config.method === 'get') {
+          config.data = null;
+        }
+      }
+      // Do something before request is sent
+      const { promiseTrackerArr } = this.state;
+      this.setState({
+        promiseTrackerArr: [
+          ...promiseTrackerArr,
+          {
+            url: config.url,
+            critical: isCriticalPromise,
+            method: config.method,
+          },
+        ],
+      });
+      return config;
+    }, (error) => (
+      // Do something with request error
+      Promise.reject(error)
+    ));
+  }
+
+  axiosResponse = () => {
+    axios.interceptors.response.use((response) => {
+      const { promiseTrackerArr } = this.state;
+
+      if (response && response.config && response.config.url) {
+        this.setState({
+          promiseTrackerArr: promiseTrackerArr.filter((item) => item.url !== response.config.url),
+        });
+      }
+      return response;
+    }, (error) => {
+      const { promiseTrackerArr } = this.state;
+      if (error && error.config && error.config.url) {
+        this.setState({
+          promiseTrackerArr: promiseTrackerArr.filter((item) => {
+            if (item.url === error.config.url && item.critical) {
+              this.setState({
+                err: error,
+              });
+            }
+            return item.url !== error.config.url;
+          }),
+        });
+      }
+      Promise.reject(error);
     });
   }
 
   render() {
-    const { error } = this.state;
+    const { promiseTrackerArr, err } = this.state;
     const { children } = this.props;
-    if (error) {
-      // Error path
-      return (
-        <div className="container">
-          <h2>Something went wrong.</h2>
-          {error && error.toString()}
-          <br />
-          <br />
-          <br />
-        </div>
-      );
-    }
-    // Normally, just render children
     return (
-      { children }
+      <div>
+        {promiseTrackerArr.length ? <div className="spinner" /> : null}
+        {!err ? (
+          <>
+            { children }
+          </>
+        ) : <h1>WARNING WARNING WARNING</h1>}
+      </div>
     );
   }
 }
+
+AsyncTracker.propTypes = {
+  children: PropTypes.func.isRequired,
+};
