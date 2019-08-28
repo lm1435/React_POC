@@ -28,6 +28,10 @@ const routes = [
         path: '/test2',
         linkTo: 'test2',
       },
+      {
+        path: '/test3',
+        linkTo: 'test3',
+      },
     ],
   },
   {
@@ -67,8 +71,12 @@ const Sidebar = () => (
                       </Link>
                     </li>
                   ))}
-                  <li><a href="https://www.google.com">Fake 2</a></li>
-                  <li><a href="https://www.google.com">Fake 3</a></li>
+                  <li><Link to="https://www.google.com">Fake 2</Link></li>
+                  <li><Link to="https://www.google.com">Fake 3</Link></li>
+                  <li><Link to="https://www.google.com">Fake 2</Link></li>
+                  <li><Link to="https://www.google.com">Fake 3</Link></li>
+                  <li><Link to="https://www.google.com">Fake 2</Link></li>
+                  <li><Link to="https://www.google.com">Fake 3</Link></li>
                 </ul>
               )}
               {route.childrenRoute && (
@@ -82,10 +90,22 @@ const Sidebar = () => (
                       </Link>
                     </li>
                   ))}
+                  <li><Link to="https://www.google.com">Fake 2</Link></li>
+                  <li><Link to="https://www.google.com">Fake 3</Link></li>
+                  <li><Link to="https://www.google.com">Fake 2</Link></li>
+                  <li><Link to="https://www.google.com">Fake 3</Link></li>
+                  <li><Link to="https://www.google.com">Fake 2</Link></li>
+                  <li><Link to="https://www.google.com">Fake 3</Link></li>
                 </ul>
               )}
             </li>
           ))}
+          <li><Link to="https://www.google.com">Fake 2</Link></li>
+          <li><Link to="https://www.google.com">Fake 3</Link></li>
+          <li><Link to="https://www.google.com">Fake 2</Link></li>
+          <li><Link to="https://www.google.com">Fake 3</Link></li>
+          <li><Link to="https://www.google.com">Fake 2</Link></li>
+          <li><Link to="https://www.google.com">Fake 3</Link></li>
         </ul>
         {routes.map((route) => (
           <Route

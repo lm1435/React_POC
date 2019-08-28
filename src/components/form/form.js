@@ -60,7 +60,8 @@ export default class FormLuis extends Component {
             name="email"
             value={formControls.email.value}
             onChange={this.changeHandler}
-            placeholder={formControls.email.placeholder}
+            placeholder={formControls.email.placeholder} 
+            
           />
           <br />
           <input
