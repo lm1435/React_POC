@@ -10,6 +10,7 @@ import PendingPipelines from '../../images/queue.png';
 import AuditsImg from '../../images/AuditsImg.png';
 import DashboardItem from './DashboardItem';
 import FormPOC from './FormPOC/FormPOC';
+import FormLuis from '../form/form';
 
 const dashboardStats = [
   {
@@ -77,6 +78,7 @@ export default class Dashboard extends Component {
           </div>
           <div className="row">
             <FormPOC />
+            <FormLuis />
           </div>
         </div>
       </section>
